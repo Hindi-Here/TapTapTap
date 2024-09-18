@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "TapTapTap Game";
+}
+
+<div class="header">
+    <div class="score-stats">
+        <div id="score">Счет: 0</div>
+        <div id="best-score"> 
+            @if (ViewData["TopPlayers"] is List<TapTapTapGame.Controllers.HomeController.Player> topPlayer)
+            {
+                <text>Лучший результат: @topPlayer[0].Score</text>
+            } 
+        </div>
+    </div>
+    <div class="game-stats">
+        <div id="tokens-remaining">Токенов до конца игры: 120</div>
+        <div id="token-scale"></div>
+    </div>
+    <div class="launch-block">
+        <input type="text" id="name-input" placeholder="Введите имя игрока" />
+        <button id="start-game-button">Запуск</button>
+    </div>
+    <div class="leaderboard">
+        <select id="top-scores">
+            <option value="" selected>LeaderBoard</option>
+            @if (ViewData["TopPlayers"] is List<TapTapTapGame.Controllers.HomeController.Player> topPlayers)
+            {
+                foreach (var player in topPlayers)
+                {
+                    <option disabled>@player.UserName - @player.Score</option>
+                }
+            }
+        </select>
+    </div>
+</div>
+
+<div id="circle-container"></div>
